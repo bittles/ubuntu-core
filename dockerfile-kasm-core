@@ -49,10 +49,6 @@ RUN bash $INST_SCRIPTS/xfce/install_xfce_ui.sh && rm -rf $INST_SCRIPTS/xfce/
 ADD ./src/$DISTRO/xfce/.config/ $HOME/.config/
 
 
-### Install Audio
-COPY ./src/ubuntu/install/audio $INST_SCRIPTS/audio/
-RUN bash $INST_SCRIPTS/audio/install_audio.sh  && rm -rf $INST_SCRIPTS/audio/
-
 ### Install Audio Input
 COPY ./src/ubuntu/install/audio_input $INST_SCRIPTS/audio_input/
 RUN bash $INST_SCRIPTS/audio_input/install_audio_input.sh && rm -rf $INST_SCRIPTS/audio_input/
