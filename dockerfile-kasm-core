@@ -12,7 +12,6 @@ ARG LANGUAGE='en_US:en'
 ARG LC_ALL='en_US.UTF-8'
 ENV DISPLAY=:1 \
     NO_VNC_PORT=6901 \
-    AUDIO_PORT=4901 \
     MAX_FRAME_RATE=24 \
     HOME=/home/hass-vivaldi \
     TERM=xterm \
@@ -27,11 +26,9 @@ ENV DISPLAY=:1 \
     LANGUAGE=$LANGUAGE \
     LC_ALL=$LC_ALL \
     PULSE_RUNTIME_PATH=/var/run/pulse \
-    SDL_GAMECONTROLLERCONFIG="030000005e040000be02000014010000,XInput Controller,platform:Linux,a:b0,b:b1,x:b2,y:b3,back:b8,guide:b16,start:b9,leftstick:b10,rightstick:b11,leftshoulder:b4,rightshoulder:b5,dpup:b12,dpdown:b13,dpleft:b14,dpright:b15,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:b6,righttrigger:b7"
 
-EXPOSE  $NO_VNC_PORT \
-       $UPLOAD_PORT \
-       $AUDIO_PORT
+
+EXPOSE  $NO_VNC_PORT
 
 WORKDIR $HOME
 RUN mkdir -p $HOME/Desktop
@@ -47,7 +44,6 @@ COPY ./src/ubuntu/install/maximize_script $STARTUPDIR/
 COPY ./src/ubuntu/install/xfce $INST_SCRIPTS/xfce/
 RUN bash $INST_SCRIPTS/xfce/install_xfce_ui.sh && rm -rf $INST_SCRIPTS/xfce/
 ADD ./src/$DISTRO/xfce/.config/ $HOME/.config/
-
 
 ### Install custom cursors
 COPY ./src/ubuntu/install/cursors $INST_SCRIPTS/cursors/
