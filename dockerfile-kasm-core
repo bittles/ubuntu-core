@@ -5,7 +5,6 @@ ARG DISTRO=ubuntu
 ### Environment config
 ARG START_XFCE4=0
 ARG START_PULSEAUDIO=0
-ARG BG_IMG=bg_kasm.png
 ARG EXTRA_SH=noop.sh
 ARG DISTRO=ubuntu
 ARG LANG='en_US.UTF-8'
