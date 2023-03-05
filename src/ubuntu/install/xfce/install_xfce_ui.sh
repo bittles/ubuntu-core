@@ -44,10 +44,9 @@ EOL
   fi
 }
 
-echo "Install Xfce4 UI components"
-if [[ "${DISTRO}" != @(centos|oracle7|oracle8|opensuse) ]]; then
-  apt-get update
-fi
+#if grep -q Jammy /etc/os-release; then
+#  apt-get purge -y xfce4-screensaver
+#fi
 
 apt-get purge -y pm-utils xscreensaver*
 apt-get clean -y
