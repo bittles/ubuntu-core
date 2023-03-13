@@ -1,0 +1,1 @@
+docker build -t bittles999/k-core -f dockerfile-kasm-core .
