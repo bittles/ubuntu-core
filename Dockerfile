@@ -15,7 +15,9 @@ WORKDIR $HOME
 
 # Install Vivaldi
 COPY ./src/ubuntu/install/vivaldi $INST_SCRIPTS/vivaldi/
-RUN bash $INST_SCRIPTS/vivaldi/install_vivaldi.sh  && rm -rf $INST_SCRIPTS/vivaldi/
+#RUN bash $INST_SCRIPTS/vivaldi/install_vivaldi.sh  && rm -rf $INST_SCRIPTS/vivaldi/
+RUN bash $INST_SCRIPTS/vivaldi/install_vivaldi.sh
+RUN bash $INST_SCRIPTS/vivaldi/update-ffmpeg.sh  && rm -rf $INST_SCRIPTS/vivaldi/
 
 # Update the desktop environment to be optimized for a single application
 RUN cp $HOME/.config/xfce4/xfconf/single-application-xfce-perchannel-xml/* $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/

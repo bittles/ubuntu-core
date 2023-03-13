@@ -8,9 +8,7 @@ mkdir -p /var/opt/vivaldi
 wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/vivaldi-browser.gpg
 echo "deb [signed-by=/usr/share/keyrings/vivaldi-browser.gpg arch=$(dpkg --print-architecture)] https://repo.vivaldi.com/archive/deb/ stable main" > /etc/apt/sources.list.d/vivaldi-archive.list
 apt-get update && apt-get install -y vivaldi-stable
-/opt/vivaldi/update-ffmpeg -v
-
-echo "Passed update ffmpeg script"
+#/opt/vivaldi/update-ffmpeg -v
 
 # Add Desktop Icon
 cp /usr/share/applications/vivaldi-stable.desktop $HOME/Desktop/
