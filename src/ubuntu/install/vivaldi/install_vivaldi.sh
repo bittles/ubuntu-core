@@ -4,10 +4,10 @@ set -ex
 VIVALDI_ARGS="--password-store=basic --no-sandbox --ignore-gpu-blocklist --user-data-dir --no-first-run --simulate-outdated-no-au='Tue, 31 Dec 2099 23:59:59 GMT'"
 
 # Install Vivaldi (Ubuntu)
+mkdir -p /var/opt/vivaldi
 wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | gpg --dearmor > /usr/share/keyrings/vivaldi-browser.gpg
 echo "deb [signed-by=/usr/share/keyrings/vivaldi-browser.gpg arch=$(dpkg --print-architecture)] https://repo.vivaldi.com/archive/deb/ stable main" > /etc/apt/sources.list.d/vivaldi-archive.list
 apt-get update && apt-get install -y vivaldi-stable
-mkdir -p /var/opt/vivaldi
 /opt/vivaldi/update-ffmpeg -v
 
 # Add Desktop Icon
