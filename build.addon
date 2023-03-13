@@ -1,1 +1,1 @@
-docker build -t bittles999/vivaldi-ingress:1.12.0.3 .
+docker build -t bittles999/vivaldi-ingress:1.12.0.4 .
