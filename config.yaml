@@ -10,6 +10,7 @@ ingress: true
 ingress_stream: true
 #panel_icon: mdi:form-textbox-password
 ingress_port: 6901
+webui: https://[HOST]:[PORT:6901]
 arch:
   - aarch64
 #ports:
