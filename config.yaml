@@ -1,0 +1,24 @@
+---
+name: Kasm Web Vivaldi
+version: v1.12.0.1
+slug: vivaldi-ingress-prebuilt
+description: Vivaldi in Home Assistant
+url: https://github.com/bittles/ubuntu-core
+image: bittles999/vivaldi-ingress
+init: false
+ingress: true
+ingress_stream: true
+#panel_icon: mdi:form-textbox-password
+ingress_port: 6901
+arch:
+  - aarch64
+#ports:
+#  6942/tcp: null
+#ports_description:
+#  6942/tcp: Vaultwarden Web interface (not needed for ingress, only for /admin page access)
+map:
+  - ssl
+#schema:
+#  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+#  request_size_limit: int?
+

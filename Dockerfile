@@ -1,6 +1,8 @@
-ARG BASE_TAG="develop"
-ARG BASE_IMAGE="core-ubuntu-focal"
-FROM kasmweb/$BASE_IMAGE:$BASE_TAG
+ARG BASE_TAG="latest"
+ARG BASE_IMAGE="k-core"
+#FROM kasmweb/$BASE_IMAGE:$BASE_TAG
+FROM bittles999/$BASE_IMAGE:$BASE_TAG
+
 USER root
 
 ENV HOME /home/kasm-default-profile
