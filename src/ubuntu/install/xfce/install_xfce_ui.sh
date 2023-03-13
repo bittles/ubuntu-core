@@ -19,12 +19,10 @@ xset -dpms
 xset s off
 xset q
 EOL
-
 chmod +x /etc/X11/xinit/xinitrc.d/disable_screensaver.sh
 }
 
 replace_default_xinit() {
-
   mkdir -p /etc/X11/xinit
   cat >/etc/X11/xinit/xinitrc <<EOL
 #!/bin/sh
@@ -46,66 +44,17 @@ EOL
   fi
 }
 
-echo "Install Xfce4 UI components"
-if [[ "${DISTRO}" != @(centos|oracle7|oracle8|opensuse) ]]; then
-  apt-get update
-fi
+#if grep -q Jammy /etc/os-release; then
+#  apt-get purge -y xfce4-screensaver
+#fi
 
-if [ "${DISTRO}" == "kali" ]  ;
-then
-    apt-get install -y supervisor kali-desktop-xfce xclip
-    # Disable the power management plugin Xfce4 from starting and displaying an error
-    PLUGIN_ID=$(grep  power-manager-plugin /etc/xdg/xfce4/panel/default.xml | perl -n -e '/plugin-(\d+)/ && print $1')
-    sed -i "s@<value type=\"int\" value=\"${PLUGIN_ID}\"/>@@g" /etc/xdg/xfce4/panel/default.xml
-  elif [ "$DISTRO" = "ubuntu" ]; then
-    apt-get install -y supervisor xfce4 xfce4-terminal xterm xclip
-  elif [[ "${DISTRO}" == @(centos|oracle7) ]]; then
-    if [ "${DISTRO}" == centos ]; then
-      yum install -y epel-release
-    else
-      yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm  
-    fi
-    disable_epel_nss_wrapper_that_breaks_firefox
-    yum groupinstall xfce -y
-    yum install -y wmctrl xset xclip xfce4-notifyd
-    get_rid_of_policykit_error
-    yum remove -y xfce4-power-manager
-  elif [ "$DISTRO" = "oracle8" ]; then
-    dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-    dnf group install xfce -y
-    dnf install -y wmctrl xset xclip xfce4-notifyd
-    get_rid_of_policykit_error
-    dnf remove -y xfce4-power-manager xfce4-screensaver
-  elif [ "$DISTRO" = "opensuse" ]; then
-    zypper install -yn -t pattern xfce
-    zypper install -yn xset xfce4-terminal xclip xfce4-notifyd
-    zypper remove -yn xfce4-power-manager
-    get_rid_of_policykit_error
-fi
+apt-get purge -y pm-utils xscreensaver*
+apt-get clean -y
 
-if grep -q Jammy /etc/os-release; then
-  apt-get purge -y xfce4-screensaver
-fi
-
-if [[ "${DISTRO}" == @(centos|oracle7) ]]; then
-  yum clean all
-elif [ "${DISTRO}" == "oracle8" ]; then
-  dnf clean all
-elif [ "${DISTRO}" == "opensuse" ]; then
-  zypper clean --all
-else
-  apt-get purge -y pm-utils xscreensaver*
-  apt-get clean -y
-fi
-
-if [[ "${DISTRO}" == @(centos|oracle7|oracle8) ]]; then
-  config_xinit_disable_screensaver
-else
-  replace_default_xinit
-  config_xinit_disable_screensaver
-  if [ "${START_XFCE4}" == "1" ] ; then
-    replace_default_99x11_common_start
-  fi
+replace_default_xinit
+config_xinit_disable_screensaver
+if [ "${START_XFCE4}" == "1" ] ; then
+  replace_default_99x11_common_start
 fi
 
 # Override default login script so users cant log themselves out of the desktop dession
