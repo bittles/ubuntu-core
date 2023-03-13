@@ -8,21 +8,16 @@ image: bittles999/vivaldi-ingress
 init: false
 ingress: true
 ingress_stream: true
-#panel_icon: mdi:form-textbox-password
 ingress_port: 6901
-webui: "https://[HOST]:[PORT:6901]/"
+webui: "[PROTO:ssl]://[HOST]:[PORT:6901]/"
 arch:
   - aarch64
-#ports:
-#  6942/tcp: null
-#ports_description:
-#  6942/tcp: Vaultwarden Web interface (not needed for ingress, only for /admin page access)
 audio: true
 video: true
 stdin: true
 map:
   - ssl
-#schema:
-#  log_level: list(trace|debug|info|notice|warning|error|fatal)?
-#  request_size_limit: int?
-
+options:
+  ssl: true
+schema:
+  ssl: bool
